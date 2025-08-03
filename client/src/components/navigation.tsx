@@ -24,8 +24,47 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full z-50 glass">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-blue via-primary-purple to-primary-green flex items-center justify-center font-bold text-lg text-white animate-pulse-neon">
-            AA
+          <div className="relative w-16 h-16 group cursor-pointer">
+            {/* Outer glow ring */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-blue via-primary-purple to-primary-green opacity-60 blur-md animate-pulse-neon group-hover:opacity-80 transition-all duration-500"></div>
+            
+            {/* Inner glow ring */}
+            <div className="absolute inset-1 rounded-full bg-gradient-to-r from-primary-green via-primary-pink to-primary-blue opacity-40 blur-sm animate-border-glow"></div>
+            
+            {/* Main logo container */}
+            <div className="relative w-full h-full rounded-full bg-gradient-to-br from-primary-blue/20 via-primary-purple/30 to-primary-green/20 backdrop-blur-sm border border-white/20 flex items-center justify-center overflow-hidden">
+              {/* Background pattern */}
+              <div className="absolute inset-0 opacity-30">
+                <div className="absolute top-1 left-1 w-2 h-2 bg-primary-blue rounded-full animate-float"></div>
+                <div className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-primary-pink rounded-full animate-float" style={{animationDelay: '-1s'}}></div>
+                <div className="absolute top-2 right-2 w-1 h-1 bg-primary-green rounded-full animate-float" style={{animationDelay: '-2s'}}></div>
+              </div>
+              
+              {/* Creative AA Design */}
+              <div className="relative z-10 flex items-center justify-center">
+                {/* First A */}
+                <div className="relative">
+                  <div className="w-3 h-6 bg-gradient-to-b from-primary-blue to-primary-purple transform -skew-x-12 rounded-sm"></div>
+                  <div className="absolute top-0 -right-1 w-3 h-6 bg-gradient-to-b from-primary-purple to-primary-blue transform skew-x-12 rounded-sm"></div>
+                  <div className="absolute top-2 left-0.5 w-2 h-0.5 bg-gradient-to-r from-primary-green to-primary-pink rounded-full"></div>
+                </div>
+                
+                {/* Second A */}
+                <div className="relative ml-1">
+                  <div className="w-3 h-6 bg-gradient-to-b from-primary-green to-primary-pink transform -skew-x-12 rounded-sm"></div>
+                  <div className="absolute top-0 -right-1 w-3 h-6 bg-gradient-to-b from-primary-pink to-primary-green transform skew-x-12 rounded-sm"></div>
+                  <div className="absolute top-2 left-0.5 w-2 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple rounded-full"></div>
+                </div>
+              </div>
+              
+              {/* Holographic overlay */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-60 animate-hologram"></div>
+            </div>
+            
+            {/* Particle effects */}
+            <div className="absolute -top-1 -left-1 w-1 h-1 bg-primary-blue rounded-full animate-ping opacity-75"></div>
+            <div className="absolute -bottom-1 -right-1 w-0.5 h-0.5 bg-primary-pink rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-0 -right-1 w-0.5 h-0.5 bg-primary-green rounded-full animate-ping opacity-75" style={{animationDelay: '2s'}}></div>
           </div>
           
           {/* Desktop Navigation */}
