@@ -41,19 +41,14 @@ export default function Navigation() {
               </div>
               
               {/* Creative AA Design */}
-              <div className="relative z-10 flex items-center justify-center">
-                {/* First A */}
-                <div className="relative">
-                  <div className="w-3 h-6 bg-gradient-to-b from-primary-blue to-primary-purple transform -skew-x-12 rounded-sm"></div>
-                  <div className="absolute top-0 -right-1 w-3 h-6 bg-gradient-to-b from-primary-purple to-primary-blue transform skew-x-12 rounded-sm"></div>
-                  <div className="absolute top-2 left-0.5 w-2 h-0.5 bg-gradient-to-r from-primary-green to-primary-pink rounded-full"></div>
-                </div>
+              <div className="relative z-10 flex items-center justify-center text-2xl font-bold">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-purple drop-shadow-lg filter">A</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-pink drop-shadow-lg filter ml-0.5">A</span>
                 
-                {/* Second A */}
-                <div className="relative ml-1">
-                  <div className="w-3 h-6 bg-gradient-to-b from-primary-green to-primary-pink transform -skew-x-12 rounded-sm"></div>
-                  <div className="absolute top-0 -right-1 w-3 h-6 bg-gradient-to-b from-primary-pink to-primary-green transform skew-x-12 rounded-sm"></div>
-                  <div className="absolute top-2 left-0.5 w-2 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple rounded-full"></div>
+                {/* Glowing text shadow effect */}
+                <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
+                  <span className="text-primary-blue opacity-50 blur-sm">A</span>
+                  <span className="text-primary-pink opacity-50 blur-sm ml-0.5">A</span>
                 </div>
               </div>
               
