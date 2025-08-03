@@ -41,14 +41,22 @@ export default function Navigation() {
               </div>
               
               {/* Creative AA Design */}
-              <div className="relative z-10 flex items-center justify-center text-2xl font-bold">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-purple drop-shadow-lg filter">A</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-primary-pink drop-shadow-lg filter ml-0.5">A</span>
+              <div className="relative z-10 flex items-center justify-center">
+                {/* Main AA Text */}
+                <div className="text-2xl font-black tracking-tight">
+                  <span className="text-white drop-shadow-2xl" style={{textShadow: '0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff'}}>A</span>
+                  <span className="text-white drop-shadow-2xl" style={{textShadow: '0 0 10px #ff006e, 0 0 20px #ff006e, 0 0 30px #ff006e'}}>A</span>
+                </div>
                 
-                {/* Glowing text shadow effect */}
-                <div className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
-                  <span className="text-primary-blue opacity-50 blur-sm">A</span>
-                  <span className="text-primary-pink opacity-50 blur-sm ml-0.5">A</span>
+                {/* Additional glow layers */}
+                <div className="absolute inset-0 flex items-center justify-center text-2xl font-black tracking-tight">
+                  <span className="text-primary-blue opacity-80 blur-sm">A</span>
+                  <span className="text-primary-pink opacity-80 blur-sm">A</span>
+                </div>
+                
+                <div className="absolute inset-0 flex items-center justify-center text-2xl font-black tracking-tight">
+                  <span className="text-primary-blue opacity-40 blur-md">A</span>
+                  <span className="text-primary-pink opacity-40 blur-md">A</span>
                 </div>
               </div>
               
