@@ -11,10 +11,10 @@ export default function SkillsSection() {
       icon: Laptop,
       color: "blue" as const,
       skills: [
-        { name: "React", icon: FaReact, level: 90, color: "blue" },
-        { name: "Next.js", icon: FaJs, level: 85, color: "purple" },
-        { name: "Tailwind", icon: SiTailwindcss, level: 88, color: "green" },
-        { name: "TypeScript", icon: FaJs, level: 82, color: "pink" }
+        { name: "React", icon: FaReact, level: 90, color: "#00d4ff", iconColor: "text-primary-blue" },
+        { name: "Next.js", icon: FaJs, level: 85, color: "#8b5cf6", iconColor: "text-primary-purple" },
+        { name: "Tailwind", icon: SiTailwindcss, level: 88, color: "#10b981", iconColor: "text-primary-green" },
+        { name: "TypeScript", icon: FaJs, level: 82, color: "#ff006e", iconColor: "text-primary-pink" }
       ]
     },
     {
@@ -22,10 +22,10 @@ export default function SkillsSection() {
       icon: Server,
       color: "purple" as const,
       skills: [
-        { name: "Python", icon: FaPython, level: 95, color: "purple" },
-        { name: "FastAPI", icon: SiFlask, level: 85, color: "green" },
-        { name: "Flask", icon: SiFlask, level: 88, color: "pink" },
-        { name: "PostgreSQL", icon: SiPostgresql, level: 80, color: "blue" }
+        { name: "Python", icon: FaPython, level: 95, color: "#8b5cf6", iconColor: "text-primary-purple" },
+        { name: "FastAPI", icon: SiFlask, level: 85, color: "#10b981", iconColor: "text-primary-green" },
+        { name: "Flask", icon: SiFlask, level: 88, color: "#ff006e", iconColor: "text-primary-pink" },
+        { name: "PostgreSQL", icon: SiPostgresql, level: 80, color: "#00d4ff", iconColor: "text-primary-blue" }
       ]
     },
     {
@@ -33,10 +33,10 @@ export default function SkillsSection() {
       icon: Brain,
       color: "green" as const,
       skills: [
-        { name: "Computer Vision", icon: Brain, level: 92, color: "green" },
-        { name: "NLP", icon: Brain, level: 88, color: "pink" },
-        { name: "spaCy", icon: Brain, level: 85, color: "blue" },
-        { name: "Automation", icon: Brain, level: 95, color: "purple" }
+        { name: "Computer Vision", icon: Brain, level: 92, color: "#10b981", iconColor: "text-primary-green" },
+        { name: "NLP", icon: Brain, level: 88, color: "#ff006e", iconColor: "text-primary-pink" },
+        { name: "spaCy", icon: Brain, level: 85, color: "#00d4ff", iconColor: "text-primary-blue" },
+        { name: "Automation", icon: Brain, level: 95, color: "#8b5cf6", iconColor: "text-primary-purple" }
       ]
     }
   ];
@@ -72,14 +72,17 @@ export default function SkillsSection() {
                 <div className="space-y-4">
                   {category.skills.map((skill) => (
                     <div key={skill.name} className="flex items-center justify-between">
-                      <span className="flex items-center">
-                        <skill.icon className={`mr-2 text-primary-${skill.color}`} />
+                      <span className="flex items-center text-white">
+                        <skill.icon className={`mr-2 ${skill.iconColor}`} />
                         {skill.name}
                       </span>
                       <div className="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
                         <div 
-                          className={`h-full bg-gradient-to-r from-primary-${skill.color} to-primary-purple transition-all duration-1000`}
-                          style={{width: `${skill.level}%`}}
+                          className="h-full transition-all duration-1000 ease-out"
+                          style={{
+                            width: `${skill.level}%`,
+                            background: `linear-gradient(90deg, ${skill.color}, ${skill.color}cc)`
+                          }}
                         />
                       </div>
                     </div>
