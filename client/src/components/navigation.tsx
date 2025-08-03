@@ -24,8 +24,8 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full z-50 glass">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold neon-text animate-pulse-neon">
-            Amal Alexander
+          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-blue via-primary-purple to-primary-green flex items-center justify-center font-bold text-lg text-white animate-pulse-neon">
+            AA
           </div>
           
           {/* Desktop Navigation */}

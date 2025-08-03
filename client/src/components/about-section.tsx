@@ -40,11 +40,15 @@ export default function AboutSection() {
                 </div>
                 <div className="flex items-center space-x-4">
                   <Linkedin className="text-primary-blue" size={20} />
-                  <span>LinkedIn Profile</span>
+                  <a href="https://www.linkedin.com/in/amal-alexander-305780131/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-blue transition-colors">
+                    LinkedIn Profile
+                  </a>
                 </div>
                 <div className="flex items-center space-x-4">
                   <Github className="text-primary-green" size={20} />
-                  <span>GitHub Portfolio</span>
+                  <a href="https://github.com/amal-alexander" target="_blank" rel="noopener noreferrer" className="hover:text-primary-green transition-colors">
+                    GitHub Portfolio
+                  </a>
                 </div>
               </div>
             </GlassCard>

@@ -15,20 +15,20 @@ export default function Footer() {
           </div>
           
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-primary-blue transition-colors duration-300">
+            <a href="https://www.linkedin.com/in/amal-alexander-305780131/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-blue transition-colors duration-300">
               <Linkedin size={32} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-primary-purple transition-colors duration-300">
+            <a href="https://github.com/amal-alexander" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-purple transition-colors duration-300">
               <Github size={32} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-primary-green transition-colors duration-300">
+            <a href="mailto:amalalex@gmail.com" className="text-gray-400 hover:text-primary-green transition-colors duration-300">
               <Mail size={32} />
             </a>
           </div>
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500">
-          <p>&copy; 2024 Amal Alexander. All rights reserved.</p>
+          <p>&copy; 2025 Amal Alexander. All rights reserved.</p>
         </div>
       </div>
     </footer>
