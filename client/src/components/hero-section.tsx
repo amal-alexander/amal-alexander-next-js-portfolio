@@ -23,7 +23,7 @@ export default function HeroSection() {
             
             <div className="text-xl md:text-2xl mb-8 font-mono">
               <span className="border-r-2 border-primary-blue animate-typing">
-                Automation • Computer Vision • Modern Tech Stacks
+                Automation • LLMs • Modern Tech Stacks
               </span>
             </div>
             

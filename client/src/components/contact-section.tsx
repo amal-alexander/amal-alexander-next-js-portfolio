@@ -146,6 +146,7 @@ export default function ContactSection() {
                           <FormControl>
                             <Input 
                               {...field}
+                              value={field.value || ""}
                               placeholder="Your Company"
                               className="bg-dark-secondary border-gray-600 focus:border-primary-green focus:ring-primary-green focus:ring-opacity-20"
                             />

@@ -71,11 +71,11 @@ export default function ProjectsSection() {
                 </div>
                 
                 <div className="flex space-x-4">
-                  <button className={`flex-1 border border-primary-${project.colors[0]} text-primary-${project.colors[0]} py-2 px-4 rounded-lg hover:bg-primary-${project.colors[0]} hover:text-dark-bg transition-all duration-300`}>
+                  <button className="flex-1 border border-primary-blue text-white py-2 px-4 rounded-lg hover:bg-primary-blue hover:text-dark-bg transition-all duration-300 font-semibold">
                     <ExternalLink className="inline mr-2" size={16} />
                     Live Demo
                   </button>
-                  <button className="flex-1 border border-gray-500 text-gray-300 py-2 px-4 rounded-lg hover:border-primary-blue hover:text-primary-blue transition-all duration-300">
+                  <button className="flex-1 border border-gray-400 text-white py-2 px-4 rounded-lg hover:border-primary-blue hover:text-primary-blue transition-all duration-300 font-semibold">
                     <Github className="inline mr-2" size={16} />
                     Code
                   </button>

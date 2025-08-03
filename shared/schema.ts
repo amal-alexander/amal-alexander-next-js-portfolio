@@ -28,6 +28,8 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).pi
   email: true,
   company: true,
   message: true,
+}).extend({
+  company: z.string().optional().nullable(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

@@ -6,13 +6,15 @@ interface AnimatedBorderProps {
   className?: string;
   glowColor?: "blue" | "purple" | "green" | "pink";
   animation?: "glow" | "hologram" | "none";
+  style?: React.CSSProperties;
 }
 
 export default function AnimatedBorder({ 
   children, 
   className, 
   glowColor = "blue",
-  animation = "glow"
+  animation = "glow",
+  style
 }: AnimatedBorderProps) {
   const animationClass = animation === "glow" ? "animate-border-glow" 
     : animation === "hologram" ? "animate-hologram" 
@@ -26,12 +28,15 @@ export default function AnimatedBorder({
   }[glowColor];
 
   return (
-    <div className={cn(
-      "holo-border rounded-2xl border-2",
-      borderColorClass,
-      animationClass,
-      className
-    )}>
+    <div 
+      className={cn(
+        "holo-border rounded-2xl border-2",
+        borderColorClass,
+        animationClass,
+        className
+      )}
+      style={style}
+    >
       {children}
     </div>
   );
