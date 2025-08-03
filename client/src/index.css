@@ -236,6 +236,12 @@
 .bg-primary-green { background-color: hsl(158, 64%, 52%); }
 .bg-primary-pink { background-color: hsl(320, 100%, 50%); }
 
+/* Background with opacity */
+.bg-primary-blue.bg-opacity-20 { background-color: hsla(195, 100%, 50%, 0.2); }
+.bg-primary-purple.bg-opacity-20 { background-color: hsla(258, 90%, 66%, 0.2); }
+.bg-primary-green.bg-opacity-20 { background-color: hsla(158, 64%, 52%, 0.2); }
+.bg-primary-pink.bg-opacity-20 { background-color: hsla(320, 100%, 50%, 0.2); }
+
 .border-primary-blue { border-color: hsl(195, 100%, 50%); }
 .border-primary-purple { border-color: hsl(258, 90%, 66%); }
 .border-primary-green { border-color: hsl(158, 64%, 52%); }

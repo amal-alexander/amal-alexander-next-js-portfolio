@@ -49,10 +49,10 @@ export default function ProjectsSection() {
             <AnimatedBorder key={project.title} className="group hover:scale-105 transition-all duration-500">
               <GlassCard>
                 <div className="flex items-center mb-6">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r from-primary-${project.colors[0]} to-primary-${project.colors[1]} flex items-center justify-center mr-4`}>
-                    <project.icon size={24} />
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-blue to-primary-purple flex items-center justify-center mr-4">
+                    <project.icon size={24} className="text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold">{project.title}</h3>
+                  <h3 className="text-2xl font-bold text-white">{project.title}</h3>
                 </div>
                 
                 <p className="text-gray-300 mb-6 leading-relaxed">
@@ -63,7 +63,7 @@ export default function ProjectsSection() {
                   {project.technologies.map((tech, techIndex) => (
                     <span 
                       key={tech}
-                      className={`px-3 py-1 bg-primary-${project.colors[techIndex % 3]} bg-opacity-20 text-primary-${project.colors[techIndex % 3]} rounded-full text-sm`}
+                      className="px-3 py-1 bg-primary-blue bg-opacity-20 text-primary-blue rounded-full text-sm font-medium"
                     >
                       {tech}
                     </span>
