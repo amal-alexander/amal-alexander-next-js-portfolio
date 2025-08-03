@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amal Alexander - Futuristic Tech Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            blue: '#00d4ff',
+                            purple: '#8b5cf6',
+                            green: '#10b981',
+                            pink: '#ff0080',
+                            yellow: '#ffff00'
+                        },
+                        dark: {
+                            bg: '#0a0a0a',
+                            secondary: '#1a1a1a',
+                            tertiary: '#2a2a2a'
+                        }
+                    },
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    },
+                    animation: {
+                        'border-glow': 'borderGlow 2s ease-in-out infinite',
+                        'pulse-neon': 'pulseNeon 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'particle': 'particle 20s linear infinite',
+                        'glitch': 'glitch 0.3s ease-in-out infinite',
+                        'hologram': 'hologram 4s ease-in-out infinite',
+                        'typing': 'typing 4s steps(40) infinite'
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom CSS Animations */
+        @keyframes borderGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px #00d4ff40, inset 0 0 20px #00d4ff20;
+                border-color: #00d4ff;
+            }
+            50% { 
+                box-shadow: 0 0 40px #8b5cf680, inset 0 0 40px #8b5cf640;
+                border-color: #8b5cf6;
+            }
+        }
+        
+        @keyframes pulseNeon {
+            0%, 100% { 
+                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff;
+            }
+            50% { 
+                text-shadow: 0 0 20px #8b5cf6, 0 0 40px #8b5cf6, 0 0 60px #8b5cf6;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(2deg); }
+            66% { transform: translateY(-10px) rotate(-2deg); }
+        }
+        
+        @keyframes particle {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(200px) scale(1); opacity: 0; }
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        @keyframes hologram {
+            0%, 100% { 
+                background: linear-gradient(45deg, #00d4ff20, #8b5cf620, #10b98120);
+                border-color: #00d4ff;
+            }
+            25% { 
+                background: linear-gradient(45deg, #8b5cf620, #10b98120, #ff008020);
+                border-color: #8b5cf6;
+            }
+            50% { 
+                background: linear-gradient(45deg, #10b98120, #ff008020, #00d4ff20);
+                border-color: #10b981;
+            }
+            75% { 
+                background: linear-gradient(45deg, #ff008020, #00d4ff20, #8b5cf620);
+                border-color: #ff0080;
+            }
+        }
+        
+        @keyframes typing {
+            0%, 50% { border-right-color: transparent; }
+            51%, 100% { border-right-color: #00d4ff; }
+        }
+        
+        /* Custom Particle System */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+        }
+        
+        .particle:nth-child(odd) {
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            animation-delay: -10s;
+        }
+        
+        .particle:nth-child(3n) {
+            background: radial-gradient(circle, #10b981 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+        
+        /* Holographic Border Effect */
+        .holo-border {
+            position: relative;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a) padding-box,
+                        linear-gradient(45deg, #00d4ff, #8b5cf6, #10b981, #ff0080) border-box;
+        }
+        
+        .holo-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, #00d4ff, #8b5cf6, #10b981, #ff0080);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            animation: hologram 4s ease-in-out infinite;
+        }
+        
+        /* Glass Morphism */
+        .glass {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Neon Text Effect */
+        .neon-text {
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+        
+        /* Circuit Pattern Background */
+        .circuit-bg {
+            background-image: 
+                radial-gradient(circle at 2px 2px, #00d4ff20 1px, transparent 0),
+                linear-gradient(90deg, transparent 20%, #8b5cf610 21%, #8b5cf610 22%, transparent 23%),
+                linear-gradient(0deg, transparent 20%, #10b98110 21%, #10b98110 22%, transparent 23%);
+            background-size: 40px 40px, 40px 40px, 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-white overflow-x-hidden">
+    <!-- Particle Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="particle w-2 h-2 animate-particle" style="left: 10%; animation-duration: 15s;"></div>
+        <div class="particle w-1 h-1 animate-particle" style="left: 20%; animation-duration: 18s; animation-delay: -3s;"></div>
+        <div class="particle w-3 h-3 animate-particle" style="left: 30%; animation-duration: 20s; animation-delay: -6s;"></div>
+        <div class="particle w-2 h-2 animate-particle" style="left: 40%; animation-duration: 16s; animation-delay: -9s;"></div>
+        <div class="particle w-1 h-1 animate-particle" style="left: 50%; animation-duration: 22s; animation-delay: -12s;"></div>
+        <div class="particle w-2 h-2 animate-particle" style="left: 60%; animation-duration: 17s; animation-delay: -15s;"></div>
+        <div class="particle w-3 h-3 animate-particle" style="left: 70%; animation-duration: 19s; animation-delay: -18s;"></div>
+        <div class="particle w-1 h-1 animate-particle" style="left: 80%; animation-duration: 21s; animation-delay: -21s;"></div>
+        <div class="particle w-2 h-2 animate-particle" style="left: 90%; animation-duration: 14s; animation-delay: -24s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [futuristic nav with animated borders] -->
+    <nav class="fixed top-0 w-full z-50 glass">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-space font-bold neon-text animate-pulse-neon">
+                    Amal Alexander
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="relative group hover:text-primary-blue transition-colors duration-300">
+                        <span>Home</span>
+                        <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="#about" class="relative group hover:text-primary-purple transition-colors duration-300">
+                        <span>About</span>
+                        <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-purple to-primary-green group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="#projects" class="relative group hover:text-primary-green transition-colors duration-300">
+                        <span>Projects</span>
+                        <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-green to-primary-pink group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="#skills" class="relative group hover:text-primary-pink transition-colors duration-300">
+                        <span>Skills</span>
+                        <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-pink to-primary-blue group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="#contact" class="relative group hover:text-primary-yellow transition-colors duration-300">
+                        <span>Contact</span>
+                        <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-yellow to-primary-blue group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                </div>
+                <button class="md:hidden text-primary-blue">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [main landing area with animated elements] -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative circuit-bg">
+        <div class="container mx-auto px-6 text-center z-10">
+            <div class="holo-border rounded-2xl p-8 md:p-12 glass animate-float">
+                <h1 class="text-5xl md:text-7xl font-space font-bold mb-6 animate-pulse-neon">
+                    <span class="block">AMAL</span>
+                    <span class="block text-primary-purple">ALEXANDER</span>
+                </h1>
+                <div class="text-xl md:text-2xl mb-8 font-mono">
+                    <span class="border-r-2 border-primary-blue animate-typing">
+                        Automation • Computer Vision • Modern Tech Stacks
+                    </span>
+                </div>
+                <p class="text-lg text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Cutting-edge technology solutions specializing in AI-powered automation, advanced computer vision systems, 
+                    and modern web development stacks. Transforming complex problems into elegant digital solutions.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button class="holo-border px-8 py-4 rounded-lg font-semibold bg-gradient-to-r from-primary-blue to-primary-purple hover:from-primary-purple hover:to-primary-green transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Explore Projects
+                    </button>
+                    <button class="border-2 border-primary-green px-8 py-4 rounded-lg font-semibold hover:bg-primary-green hover:text-dark-bg transition-all duration-300 transform hover:scale-105 animate-border-glow">
+                        <i class="fas fa-download mr-2"></i>
+                        Download CV
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Tech Icons -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-20 left-10 text-4xl text-primary-blue animate-float opacity-20">
+                <i class="fab fa-python"></i>
+            </div>
+            <div class="absolute top-40 right-20 text-3xl text-primary-purple animate-float opacity-20" style="animation-delay: -2s;">
+                <i class="fab fa-react"></i>
+            </div>
+            <div class="absolute bottom-40 left-20 text-5xl text-primary-green animate-float opacity-20" style="animation-delay: -4s;">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="absolute bottom-20 right-10 text-3xl text-primary-pink animate-float opacity-20" style="animation-delay: -6s;">
+                <i class="fas fa-eye"></i>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- About Section -->
+    <!-- @COMPONENT: AboutSection [expertise showcase] -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-space font-bold mb-6 neon-text">
+                    About Me
+                </h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-primary-blue to-primary-purple mx-auto"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="holo-border rounded-2xl p-8 glass">
+                    <h3 class="text-2xl font-space font-bold text-primary-blue mb-6">
+                        <i class="fas fa-user-astronaut mr-3"></i>
+                        Tech Visionary
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        Passionate technology expert specializing in cutting-edge automation solutions, 
+                        advanced computer vision systems, and modern web development stacks. 
+                        With extensive experience in AI/ML technologies, I transform complex business 
+                        challenges into elegant, scalable digital solutions.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-8">
+                        My expertise spans SERP data pipelines, API integrations, DOM visual diff tools, 
+                        and spaCy-powered NLP systems. I'm passionate about creating no-code/low-code 
+                        solutions that empower businesses to achieve their digital transformation goals.
+                    </p>
+                    
+                    <!-- Contact Info -->
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-envelope text-primary-purple"></i>
+                            <span data-bind="contact.email">amalalex95@gmail.com</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fab fa-linkedin text-primary-blue"></i>
+                            <span>LinkedIn Profile</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fab fa-github text-primary-green"></i>
+                            <span>GitHub Portfolio</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- Expertise Areas -->
+                    <div class="holo-border rounded-xl p-6 glass animate-border-glow">
+                        <h4 class="text-xl font-space font-semibold text-primary-purple mb-4">
+                            <i class="fas fa-cogs mr-2"></i>
+                            Automation Excellence
+                        </h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><i class="fas fa-chevron-right text-primary-blue mr-2"></i>SERP Data Pipelines</li>
+                            <li><i class="fas fa-chevron-right text-primary-blue mr-2"></i>API Integrations</li>
+                            <li><i class="fas fa-chevron-right text-primary-blue mr-2"></i>No-Code/Low-Code Solutions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="holo-border rounded-xl p-6 glass animate-border-glow" style="animation-delay: -1s;">
+                        <h4 class="text-xl font-space font-semibold text-primary-green mb-4">
+                            <i class="fas fa-eye mr-2"></i>
+                            Computer Vision
+                        </h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><i class="fas fa-chevron-right text-primary-green mr-2"></i>DOM Visual Diff Tools</li>
+                            <li><i class="fas fa-chevron-right text-primary-green mr-2"></i>Content Analyzers</li>
+                            <li><i class="fas fa-chevron-right text-primary-green mr-2"></i>Above-the-Fold Analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="holo-border rounded-xl p-6 glass animate-border-glow" style="animation-delay: -2s;">
+                        <h4 class="text-xl font-space font-semibold text-primary-pink mb-4">
+                            <i class="fas fa-layer-group mr-2"></i>
+                            Modern Tech Stacks
+                        </h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><i class="fas fa-chevron-right text-primary-pink mr-2"></i>React/Vite/Next.js Frontend</li>
+                            <li><i class="fas fa-chevron-right text-primary-pink mr-2"></i>Python/FastAPI/Flask Backend</li>
+                            <li><i class="fas fa-chevron-right text-primary-pink mr-2"></i>SERP API/Puppeteer Tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AboutSection -->
+
+    <!-- Projects Section -->
+    <!-- @COMPONENT: ProjectsSection [featured projects with animated cards] -->
+    <section id="projects" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-space font-bold mb-6 neon-text">
+                    Featured Projects
+                </h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-primary-green to-primary-pink mx-auto"></div>
+            </div>
+            
+            <!-- @MAP: projects.map(project => ( -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Project 1: AI Redirect Mapping -->
+                <div class="holo-border rounded-2xl p-8 glass group hover:scale-105 transition-all duration-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-blue to-primary-purple flex items-center justify-center mr-4">
+                            <i class="fas fa-route text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold">AI Redirect Mapping</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Intelligent URL redirect mapping system using machine learning algorithms 
+                        to automatically detect and optimize website redirect chains for better SEO performance.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary-blue bg-opacity-20 text-primary-blue rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-primary-purple bg-opacity-20 text-primary-purple rounded-full text-sm">Machine Learning</span>
+                        <span class="px-3 py-1 bg-primary-green bg-opacity-20 text-primary-green rounded-full text-sm">SEO</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="flex-1 border border-primary-blue text-primary-blue py-2 px-4 rounded-lg hover:bg-primary-blue hover:text-dark-bg transition-all duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </button>
+                        <button class="flex-1 border border-gray-500 text-gray-300 py-2 px-4 rounded-lg hover:border-primary-blue hover:text-primary-blue transition-all duration-300">
+                            <i class="fab fa-github mr-2"></i>
+                            Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2: DOM vs Bot Diff Checker -->
+                <div class="holo-border rounded-2xl p-8 glass group hover:scale-105 transition-all duration-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-purple to-primary-green flex items-center justify-center mr-4">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold">DOM vs Bot Diff Checker</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Advanced visual comparison tool that analyzes differences between human-rendered 
+                        and bot-crawled versions of web pages to identify SEO and accessibility issues.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary-purple bg-opacity-20 text-primary-purple rounded-full text-sm">JavaScript</span>
+                        <span class="px-3 py-1 bg-primary-green bg-opacity-20 text-primary-green rounded-full text-sm">Computer Vision</span>
+                        <span class="px-3 py-1 bg-primary-pink bg-opacity-20 text-primary-pink rounded-full text-sm">Puppeteer</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="flex-1 border border-primary-purple text-primary-purple py-2 px-4 rounded-lg hover:bg-primary-purple hover:text-dark-bg transition-all duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </button>
+                        <button class="flex-1 border border-gray-500 text-gray-300 py-2 px-4 rounded-lg hover:border-primary-purple hover:text-primary-purple transition-all duration-300">
+                            <i class="fab fa-github mr-2"></i>
+                            Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3: Google NLP Clone -->
+                <div class="holo-border rounded-2xl p-8 glass group hover:scale-105 transition-all duration-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-green to-primary-pink flex items-center justify-center mr-4">
+                            <i class="fas fa-language text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold">Google NLP Clone</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Comprehensive natural language processing platform replicating Google's NLP capabilities 
+                        using spaCy, with sentiment analysis, entity recognition, and text classification.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary-green bg-opacity-20 text-primary-green rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-primary-pink bg-opacity-20 text-primary-pink rounded-full text-sm">spaCy</span>
+                        <span class="px-3 py-1 bg-primary-blue bg-opacity-20 text-primary-blue rounded-full text-sm">NLP</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="flex-1 border border-primary-green text-primary-green py-2 px-4 rounded-lg hover:bg-primary-green hover:text-dark-bg transition-all duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </button>
+                        <button class="flex-1 border border-gray-500 text-gray-300 py-2 px-4 rounded-lg hover:border-primary-green hover:text-primary-green transition-all duration-300">
+                            <i class="fab fa-github mr-2"></i>
+                            Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 4: Above-the-Fold Analyzer -->
+                <div class="holo-border rounded-2xl p-8 glass group hover:scale-105 transition-all duration-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-pink to-primary-blue flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold">Above-the-Fold Analyzer</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Performance optimization tool that analyzes above-the-fold content across different 
+                        devices and connection speeds to improve Core Web Vitals and user experience.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary-pink bg-opacity-20 text-primary-pink rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-primary-blue bg-opacity-20 text-primary-blue rounded-full text-sm">Performance</span>
+                        <span class="px-3 py-1 bg-primary-purple bg-opacity-20 text-primary-purple rounded-full text-sm">Analytics</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="flex-1 border border-primary-pink text-primary-pink py-2 px-4 rounded-lg hover:bg-primary-pink hover:text-dark-bg transition-all duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </button>
+                        <button class="flex-1 border border-gray-500 text-gray-300 py-2 px-4 rounded-lg hover:border-primary-pink hover:text-primary-pink transition-all duration-300">
+                            <i class="fab fa-github mr-2"></i>
+                            Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ProjectsSection -->
+
+    <!-- Skills Section -->
+    <!-- @COMPONENT: SkillsSection [tech stack showcase] -->
+    <section id="skills" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-space font-bold mb-6 neon-text">
+                    Tech Arsenal
+                </h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-primary-pink to-primary-blue mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="holo-border rounded-2xl p-8 glass animate-border-glow">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-blue to-primary-purple flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-laptop-code text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold text-primary-blue">Frontend</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span><i class="fab fa-react mr-2 text-primary-blue"></i>React</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-blue to-primary-purple w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fab fa-js-square mr-2 text-primary-purple"></i>Next.js</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-purple to-primary-green w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-wind mr-2 text-primary-green"></i>Tailwind</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-green to-primary-pink w-4/5"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fab fa-html5 mr-2 text-primary-pink"></i>TypeScript</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-pink to-primary-blue w-4/5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="holo-border rounded-2xl p-8 glass animate-border-glow" style="animation-delay: -1s;">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-purple to-primary-green flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-server text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold text-primary-purple">Backend</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span><i class="fab fa-python mr-2 text-primary-purple"></i>Python</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-purple to-primary-green w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-bolt mr-2 text-primary-green"></i>FastAPI</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-green to-primary-pink w-4/5"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-flask mr-2 text-primary-pink"></i>Flask</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-pink to-primary-blue w-4/5"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-database mr-2 text-primary-blue"></i>PostgreSQL</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-blue to-primary-purple w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI/ML Skills -->
+                <div class="holo-border rounded-2xl p-8 glass animate-border-glow" style="animation-delay: -2s;">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-green to-primary-pink flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-space font-bold text-primary-green">AI/ML</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-eye mr-2 text-primary-green"></i>Computer Vision</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-green to-primary-pink w-5/6"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-language mr-2 text-primary-pink"></i>NLP</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-pink to-primary-blue w-4/5"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-cog mr-2 text-primary-blue"></i>spaCy</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-blue to-primary-purple w-4/5"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span><i class="fas fa-robot mr-2 text-primary-purple"></i>Automation</span>
+                            <div class="w-20 h-2 bg-dark-tertiary rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary-purple to-primary-green w-5/6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: SkillsSection -->
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [futuristic contact form] -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-space font-bold mb-6 neon-text">
+                    Let's Connect
+                </h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-primary-blue to-primary-purple mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Ready to transform your ideas into cutting-edge digital solutions? 
+                    Let's discuss your next project.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="holo-border rounded-2xl p-8 glass">
+                        <h3 class="text-2xl font-space font-bold text-primary-blue mb-6">
+                            <i class="fas fa-paper-plane mr-3"></i>
+                            Send Message
+                        </h3>
+                        
+                        <form class="space-y-6" data-implementation="Connect to Flask backend API">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                                <input 
+                                    type="text" 
+                                    data-bind="form.name"
+                                    class="w-full px-4 py-3 bg-dark-secondary border border-gray-600 rounded-lg focus:border-primary-blue focus:ring-2 focus:ring-primary-blue focus:ring-opacity-20 transition-all duration-300"
+                                    placeholder="Your Name"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                <input 
+                                    type="email" 
+                                    data-bind="form.email"
+                                    class="w-full px-4 py-3 bg-dark-secondary border border-gray-600 rounded-lg focus:border-primary-purple focus:ring-2 focus:ring-primary-purple focus:ring-opacity-20 transition-all duration-300"
+                                    placeholder="your.email@example.com"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Company (Optional)</label>
+                                <input 
+                                    type="text" 
+                                    data-bind="form.company"
+                                    class="w-full px-4 py-3 bg-dark-secondary border border-gray-600 rounded-lg focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:ring-opacity-20 transition-all duration-300"
+                                    placeholder="Your Company"
+                                >
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                                <textarea 
+                                    rows="5"
+                                    data-bind="form.message"
+                                    class="w-full px-4 py-3 bg-dark-secondary border border-gray-600 rounded-lg focus:border-primary-pink focus:ring-2 focus:ring-primary-pink focus:ring-opacity-20 transition-all duration-300 resize-none"
+                                    placeholder="Tell me about your project..."
+                                ></textarea>
+                            </div>
+                            <button 
+                                type="submit"
+                                data-event="click:handleContactSubmit"
+                                class="w-full holo-border py-4 rounded-lg font-semibold bg-gradient-to-r from-primary-blue to-primary-purple hover:from-primary-purple hover:to-primary-green transition-all duration-300 transform hover:scale-105"
+                            >
+                                <i class="fas fa-rocket mr-2"></i>
+                                Launch Message
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div class="holo-border rounded-xl p-6 glass">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-blue to-primary-purple flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-blue">Email</h4>
+                                    <p class="text-gray-300" data-bind="contact.email">amalalex95@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="holo-border rounded-xl p-6 glass">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-purple to-primary-green flex items-center justify-center mr-4">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-purple">LinkedIn</h4>
+                                    <p class="text-gray-300">Professional Network</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="holo-border rounded-xl p-6 glass">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-primary-green to-primary-pink flex items-center justify-center mr-4">
+                                    <i class="fab fa-github text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-green">GitHub</h4>
+                                    <p class="text-gray-300">Code Repository</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="holo-border rounded-xl p-6 glass">
+                            <h4 class="font-space font-semibold text-primary-pink mb-4">
+                                <i class="fas fa-clock mr-2"></i>
+                                Response Time
+                            </h4>
+                            <p class="text-gray-300">
+                                I typically respond within 24 hours. For urgent projects, 
+                                feel free to mention it in your message.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [minimal futuristic footer] -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <div class="text-2xl font-space font-bold neon-text mb-2">
+                        Amal Alexander
+                    </div>
+                    <p class="text-gray-400">
+                        Transforming ideas into digital reality
+                    </p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary-blue transition-colors duration-300">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary-purple transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary-green transition-colors duration-300">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2024 Amal Alexander. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        (function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add glitch effect on hover to certain elements
+            const glitchElements = document.querySelectorAll('.neon-text');
+            glitchElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.classList.add('animate-glitch');
+                });
+                element.addEventListener('mouseleave', function() {
+                    this.classList.remove('animate-glitch');
+                });
+            });
+
+            // Form submission handler
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement form submission to Flask backend API
+                    console.log('Form submission would be handled here');
+                    
+                    // Show success message (placeholder)
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+                    button.classList.add('bg-primary-green');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.classList.remove('bg-primary-green');
+                    }, 3000);
+                });
+            }
+
+            // Dynamic particle generation
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle w-1 h-1 animate-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                const particleContainer = document.querySelector('.fixed.inset-0');
+                if (particleContainer) {
+                    particleContainer.appendChild(particle);
+                    
+                    // Remove particle after animation
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 25000);
+                }
+            }
+
+            // Create new particles periodically
+            setInterval(createParticle, 3000);
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe sections for scroll animations
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+        })();
+    </script>
+</body>
+</html>
