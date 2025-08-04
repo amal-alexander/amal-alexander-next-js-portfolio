@@ -4,9 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",                // Runs Vite for frontend dev
-    "build": "vite build",        // Builds static frontend
-    "start": "vite preview",      // Previews build locally
+    "dev": "vite",                
+    "build": "vite build",        
+    "start": "vite preview",      
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
