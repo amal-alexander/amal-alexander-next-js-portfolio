@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Send, Mail, Linkedin, Github, Clock, Rocket } from "lucide-react";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
 import AnimatedBorder from "@/components/ui/animated-border";
 import GlassCard from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
@@ -14,9 +11,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 export default function ContactSection() {
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
-
   const form = useForm<InsertContactMessage>({
     resolver: zodResolver(insertContactMessageSchema),
     defaultValues: {
@@ -27,32 +21,6 @@ export default function ContactSection() {
     }
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: InsertContactMessage) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: InsertContactMessage) => {
-    contactMutation.mutate(data);
-  };
-
   const contactMethods = [
     {
       icon: Mail,
@@ -62,14 +30,14 @@ export default function ContactSection() {
     },
     {
       icon: Linkedin,
-      title: "LinkedIn", 
+      title: "LinkedIn",
       subtitle: "Professional Network",
       colors: ["purple", "green"] as const
     },
     {
       icon: Github,
       title: "GitHub",
-      subtitle: "Code Repository", 
+      subtitle: "Code Repository",
       colors: ["green", "pink"] as const
     }
   ];
@@ -83,11 +51,11 @@ export default function ContactSection() {
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-primary-blue to-primary-purple mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Ready to transform your ideas into cutting-edge digital solutions? 
+            Ready to transform your ideas into cutting-edge digital solutions?
             Let's discuss your next project.
           </p>
         </div>
-        
+
         <div className="max-w-4xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -97,9 +65,25 @@ export default function ContactSection() {
                   <Send className="inline mr-3" />
                   Send Message
                 </h3>
-                
+
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const name = form.getValues("name");
+                      const email = form.getValues("email");
+                      const company = form.getValues("company");
+                      const message = form.getValues("message");
+
+                      const subject = encodeURIComponent(`New message from ${name || "Website Visitor"}`);
+                      const body = encodeURIComponent(
+                        `Name: ${name}\nEmail: ${email}\nCompany: ${company || "N/A"}\n\nMessage:\n${message}`
+                      );
+
+                      window.location.href = `mailto:amalalex95@gmail.com?subject=${subject}&body=${body}`;
+                    }}
+                    className="space-y-6"
+                  >
                     <FormField
                       control={form.control}
                       name="name"
@@ -107,7 +91,7 @@ export default function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-gray-300">Name</FormLabel>
                           <FormControl>
-                            <Input 
+                            <Input
                               {...field}
                               placeholder="Your Name"
                               className="bg-dark-secondary border-gray-600 focus:border-primary-blue focus:ring-primary-blue focus:ring-opacity-20"
@@ -117,7 +101,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="email"
@@ -125,7 +109,7 @@ export default function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-gray-300">Email</FormLabel>
                           <FormControl>
-                            <Input 
+                            <Input
                               {...field}
                               type="email"
                               placeholder="your.email@example.com"
@@ -136,7 +120,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="company"
@@ -144,7 +128,7 @@ export default function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-gray-300">Company (Optional)</FormLabel>
                           <FormControl>
-                            <Input 
+                            <Input
                               {...field}
                               value={field.value || ""}
                               placeholder="Your Company"
@@ -155,7 +139,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
@@ -163,7 +147,7 @@ export default function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-gray-300">Message</FormLabel>
                           <FormControl>
-                            <Textarea 
+                            <Textarea
                               {...field}
                               rows={5}
                               placeholder="Tell me about your project..."
@@ -174,33 +158,28 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-                    
-                    <Button 
+
+                    <Button
                       type="submit"
-                      disabled={contactMutation.isPending}
                       className="w-full holo-border py-4 rounded-lg font-semibold bg-gradient-to-r from-primary-blue to-primary-purple hover:from-primary-purple hover:to-primary-green transition-all duration-300 transform hover:scale-105 border-0"
                     >
-                      {contactMutation.isPending ? (
-                        <>Processing...</>
-                      ) : (
-                        <>
-                          <Rocket className="inline mr-2" size={20} />
-                          Launch Message
-                        </>
-                      )}
+                      <Rocket className="inline mr-2" size={20} />
+                      Launch Message
                     </Button>
                   </form>
                 </Form>
               </GlassCard>
             </AnimatedBorder>
-            
+
             {/* Contact Info */}
             <div className="space-y-8">
               {contactMethods.map((method) => (
                 <AnimatedBorder key={method.title}>
                   <GlassCard>
                     <div className="flex items-center mb-4">
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-r from-primary-${method.colors[0]} to-primary-${method.colors[1]} flex items-center justify-center mr-4`}>
+                      <div
+                        className={`w-12 h-12 rounded-lg bg-gradient-to-r from-primary-${method.colors[0]} to-primary-${method.colors[1]} flex items-center justify-center mr-4`}
+                      >
                         <method.icon size={24} />
                       </div>
                       <div>
@@ -213,7 +192,7 @@ export default function ContactSection() {
                   </GlassCard>
                 </AnimatedBorder>
               ))}
-              
+
               <AnimatedBorder>
                 <GlassCard>
                   <h4 className="font-semibold text-primary-pink mb-4">
@@ -221,7 +200,7 @@ export default function ContactSection() {
                     Response Time
                   </h4>
                   <p className="text-gray-300">
-                    I typically respond within 24 hours. For urgent projects, 
+                    I typically respond within 24 hours. For urgent projects,
                     feel free to mention it in your message.
                   </p>
                 </GlassCard>
