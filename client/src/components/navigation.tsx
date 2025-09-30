@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation, useHistory } from "wouter"; // <-- Use Wouter's Link and hooks
+import { Link, useLocation } from "wouter";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,14 +14,13 @@ export default function Navigation() {
     { href: "#contact", label: "Contact", color: "text-primary-yellow" },
   ];
 
-  const [location] = useLocation();
-  const history = useHistory();
+  const [location, setLocation] = useLocation();
 
   const scrollToSection = (href: string) => {
     const sectionId = href.substring(1);
     if (location !== '/') {
       // Navigate to home and then scroll
-      history.push('/');
+      setLocation('/');
       setTimeout(() => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100); // Small delay to allow the page to change
