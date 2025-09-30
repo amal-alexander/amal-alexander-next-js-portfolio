@@ -18,15 +18,11 @@ export default function Navigation() {
           <Link href="/" onClick={() => navigate("/")} className="text-xl font-bold">
             Amal Alexander
           </Link>
-
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-gray-500 hover:text-gray-600">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-
-          {/* Desktop menu */}
           <div className="hidden md:flex space-x-4">
             <Link href="/" onClick={() => navigate("/")} className={`nav-link ${location === "/" ? "text-blue-600" : "text-gray-600"}`}>
               Home
@@ -42,8 +38,6 @@ export default function Navigation() {
             </Link>
           </div>
         </div>
-
-        {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-2">
