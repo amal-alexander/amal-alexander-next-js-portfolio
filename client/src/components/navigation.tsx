@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation, useHistory } from "wouter"; // <-- Use Wouter's Link and hooks
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,13 +10,23 @@ export default function Navigation() {
     { href: "#about", label: "About", color: "text-primary-purple" },
     { href: "#projects", label: "Projects", color: "text-primary-green" },
     { href: "#skills", label: "Skills", color: "text-primary-pink" },
-    { href: "#contact", label: "Contact", color: "text-primary-yellow" }
+    { href: "/ultra-frog", label: "Ultra Frog", color: "text-teal-400" },
+    { href: "#contact", label: "Contact", color: "text-primary-yellow" },
   ];
 
+  const [location] = useLocation();
+  const history = useHistory();
+
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const sectionId = href.substring(1);
+    if (location !== '/') {
+      // Navigate to home and then scroll
+      history.push('/');
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100); // Small delay to allow the page to change
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     setIsOpen(false);
   };
@@ -73,14 +84,21 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className={`relative group hover:${item.color} transition-colors duration-300`}
-              >
-                <span>{item.label}</span>
-                <div className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300`}></div>
-              </button>
+              item.href.startsWith("#") ? (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`relative group hover:${item.color} transition-colors duration-300`}
+                >
+                  <span>{item.label}</span>
+                  <div className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300`}></div>
+                </button>
+              ) : (
+                <Link to={item.href} key={item.href} className={`relative group hover:${item.color} transition-colors duration-300`}>
+                  <span>{item.label}</span>
+                  <div className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300`}></div>
+                </Link>
+              )
             ))}
           </div>
 
@@ -97,13 +115,20 @@ export default function Navigation() {
         {isOpen && (
           <div className="md:hidden mt-4 glass rounded-lg p-4">
             {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}
-              >
-                {item.label}
-              </button>
+              <React.Fragment key={item.href}>
+                {item.href.startsWith("#") ? (
+                  <button
+                    onClick={() => scrollToSection(item.href)}
+                    className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link to={item.href} onClick={() => setIsOpen(false)} className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}>
+                    {item.label}
+                  </Link>
+                )}
+              </React.Fragment>
             ))}
           </div>
         )}
