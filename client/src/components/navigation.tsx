@@ -4,7 +4,6 @@ import { Link, useLocation } from "wouter";
 
 function Navigation() {
   const [location, setLocation] = useLocation();
-  // Use setLocation("/target-path") to navigate
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -15,8 +14,6 @@ function Navigation() {
     { href: "/ultra-frog", label: "Ultra Frog", color: "text-teal-400" },
     { href: "#contact", label: "Contact", color: "text-primary-yellow" },
   ];
-
-  const [location, setLocation] = useLocation();
 
   const scrollToSection = (href: string) => {
     const sectionId = href.substring(1);
@@ -137,3 +134,5 @@ function Navigation() {
     </nav>
   );
 }
+
+export default Navigation;
