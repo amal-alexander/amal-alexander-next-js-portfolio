@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
-export default function Navigation() {
+function Navigation() {
+  const [location, setLocation] = useLocation();
+  // Use setLocation("/target-path") to navigate
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
