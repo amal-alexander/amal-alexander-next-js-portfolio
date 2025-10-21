@@ -1,3 +1,4 @@
+import React from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -24,7 +25,9 @@ function App() {
       <TooltipProvider>
         <Navigation />
         <Toaster />
-        <Router />
+        <main>
+          <Router />
+        </main>
       </TooltipProvider>
     </QueryClientProvider>
   );
