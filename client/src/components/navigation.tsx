@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import Link from "next/link";
+import { usePathname } from 'next/navigation';
 
 function Navigation() {
-  const [location, setLocation] = useLocation();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -15,19 +18,22 @@ function Navigation() {
     { href: "#contact", label: "Contact", color: "text-primary-yellow" },
   ];
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     const sectionId = href.substring(1);
-    if (location !== '/') {
-      // Navigate to home and then scroll
-      setLocation('/');
-      setTimeout(() => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100); // Small delay to allow the page to change
-    } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     setIsOpen(false);
   };
+
+  // Effect to handle scrolling when navigating back to home page
+  useEffect(() => {
+    if (pathname === '/' && window.location.hash) {
+      document.getElementById(window.location.hash.substring(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [pathname]);
 
   return (
     <nav className="fixed top-0 w-full z-50 glass">
@@ -84,15 +90,20 @@ function Navigation() {
             {navItems.map((item) => (
               item.href.startsWith("#") ? (
                 <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
+                  key={item.label}
+                  onClick={(e) => scrollToSection(e, item.href)}
                   className={`relative group hover:${item.color} transition-colors duration-300`}
                 >
                   <span>{item.label}</span>
                   <div className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300`}></div>
                 </button>
               ) : (
-                <Link to={item.href} key={item.href} className={`relative group hover:${item.color} transition-colors duration-300`}>
+                <Link
+                  href={item.href}
+                  key={item.label}
+                  className={`relative group hover:${item.color} transition-colors duration-300`}
+                  onClick={() => setIsOpen(false)}
+                >
                   <span>{item.label}</span>
                   <div className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple group-hover:w-full transition-all duration-300`}></div>
                 </Link>
@@ -113,16 +124,20 @@ function Navigation() {
         {isOpen && (
           <div className="md:hidden mt-4 glass rounded-lg p-4">
             {navItems.map((item) => (
-              <React.Fragment key={item.href}>
+              <React.Fragment key={item.label}>
                 {item.href.startsWith("#") ? (
                   <button
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={(e) => scrollToSection(e, item.href)}
                     className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}
                   >
                     {item.label}
                   </button>
                 ) : (
-                  <Link to={item.href} onClick={() => { setIsOpen(false); if (item.href.startsWith('#')) scrollToSection(item.href); }} className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}
+                  >
                     {item.label}
                   </Link>
                 )}
