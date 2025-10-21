@@ -122,7 +122,7 @@ function Navigation() {
                     {item.label}
                   </button>
                 ) : (
-                  <Link to={item.href} onClick={() => setIsOpen(false)} className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}>
+                  <Link to={item.href} onClick={() => { setIsOpen(false); if (item.href.startsWith('#')) scrollToSection(item.href); }} className={`block w-full text-left py-2 hover:${item.color} transition-colors duration-300`}>
                     {item.label}
                   </Link>
                 )}
